@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group = 'mg.kafkalearning'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    // Additional repositories in case Maven Central is unavailable
+    maven { url 'https://repo.spring.io/release' }
+    maven { url 'https://jcenter.bintray.com/' }
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.36'
+    // Updated Kafka client version to ensure compatibility and availability
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.5.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8' // Ensures consistent encoding across environments
+}
